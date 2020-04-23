@@ -45,7 +45,7 @@ extension ListCharactersViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = listTbv.dequeueReusableCell(withIdentifier: "charactersListCell") as? CharactersListCell {
-            cell.configure(imageURL: interactor.characters?[indexPath.row].thumbnail?.path ?? "" , name: interactor.characters?[indexPath.row].name ?? "", interactor: interactor)
+            cell.configure(imageURL: interactor.characters?[indexPath.row].thumbnail?.path ?? "" , name: interactor.characters?[indexPath.row].name ?? "")
             cell.selectionStyle = .none
             return cell
         }
@@ -61,9 +61,11 @@ extension ListCharactersViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = DetailViewController(nibName: "Detail", bundle: nil) as DetailViewController
-//        vc.movie = movies[indexPath.row]
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = DetailsCharacterViewController(nibName: "DetailsCharacter", bundle: nil) as DetailsCharacterViewController
+        if let charac = interactor.characters?[indexPath.row] {
+            vc.character = charac
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 }

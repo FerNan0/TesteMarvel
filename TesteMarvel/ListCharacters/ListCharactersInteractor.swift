@@ -6,13 +6,13 @@
 //  Copyright © 2020 Fernando Duarte. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol ListCharactersInteractorHelper {
     func doRequestCharacters()
 }
 class ListCharactersInteractor: NSObject {
-    var characters: [Characters]? = nil
+    var characters: [Characters]?
     var presenter: ListCharactersPresenterHelper!
     
   

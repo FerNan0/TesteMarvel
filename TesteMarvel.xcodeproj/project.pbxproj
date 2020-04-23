@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,7 +37,7 @@
 		ED3DEB5F2451EEA500B349B9 /* DetailsCharacterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCharacterInteractor.swift; sourceTree = "<group>"; };
 		ED3DEB612451EEB500B349B9 /* DetailsCharacterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCharacterPresenter.swift; sourceTree = "<group>"; };
 		ED3DEB632451EED100B349B9 /* DetailsCharacter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsCharacter.xib; sourceTree = "<group>"; };
-		ED6F612F2450FCF90047DE9B /* TesteMarvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TesteMarvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED6F612F2450FCF90047DE9B /* TesteMarvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = TesteMarvel.app; path = "/Users/fernando/Desktop/Pasta Sem Título/Marvel/TesteMarvel/build/Debug-iphoneos/TesteMarvel.app"; sourceTree = "<absolute>"; };
 		ED6F61322450FCF90047DE9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED6F613B2450FCFA0047DE9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED6F613E2450FCFA0047DE9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -78,16 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				ED6F61312450FCF90047DE9B /* TesteMarvel */,
-				ED6F61302450FCF90047DE9B /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		ED6F61302450FCF90047DE9B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				ED6F612F2450FCF90047DE9B /* TesteMarvel.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		ED6F61312450FCF90047DE9B /* TesteMarvel */ = {
@@ -190,7 +181,7 @@
 				Base,
 			);
 			mainGroup = ED6F61262450FCF90047DE9B;
-			productRefGroup = ED6F61302450FCF90047DE9B /* Products */;
+			productRefGroup = ED6F61262450FCF90047DE9B;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

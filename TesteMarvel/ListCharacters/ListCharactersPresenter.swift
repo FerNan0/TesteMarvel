@@ -6,7 +6,7 @@
 //  Copyright © 2020 Fernando Duarte. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol ListCharactersPresenterHelper {
     func presentAlertFailedRequest()

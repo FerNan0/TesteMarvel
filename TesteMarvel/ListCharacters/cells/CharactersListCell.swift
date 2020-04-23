@@ -20,7 +20,7 @@ class CharactersListCell: UITableViewCell {
        }
     }
 
-    func configure(imageURL: String, name: String, interactor: ListCharactersInteractorHelper) {
+    func configure(imageURL: String, name: String) {
         lblName.text = "\(name)"
         imgView.image = ConnectorRequests.downloadImage(urlString: imageURL)
         

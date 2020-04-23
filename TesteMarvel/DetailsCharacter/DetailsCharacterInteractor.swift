@@ -6,4 +6,13 @@
 //  Copyright © 2020 Fernando Duarte. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol DetailsCharacterInteractorHelper {
+    func downloadImage(urlString: String) -> UIImage
+}
+class DetailsCharacterInteractor: DetailsCharacterInteractorHelper {
+    func downloadImage(urlString: String) -> UIImage {
+        return ConnectorRequests.downloadImage(urlString: urlString)
+    }    
+}

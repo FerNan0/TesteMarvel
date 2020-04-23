@@ -16,20 +16,25 @@ protocol ListCharactersViewControllerHelper {
 class ListCharactersViewController: UIViewController {
 
     @IBOutlet weak var listTbv: UITableView!
-    let interactor = ListCharactersInteractor()
+    var interactor:ListCharactersInteractorHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Characters List"
+        
+        let presenter = ListCharactersPresenter()
+        let interac = ListCharactersInteractor()        
+        presenter.viewController = self
+        interac.presenter = presenter
+        interactor = interac
+        interactor.doRequestCharacters()
+        
         listTbv.delegate = self
         listTbv.dataSource = self
         listTbv.tableFooterView = UIView()
         listTbv.allowsSelection = true
         listTbv.register(UINib(nibName: "CharactersListCell", bundle: nil), forCellReuseIdentifier: "charactersListCell")
-        let presenter = ListCharactersPresenter()
-        presenter.viewController = self
-        interactor.presenter = presenter
-        interactor.doRequestCharacters()
+
     }
 }
 
@@ -40,12 +45,15 @@ extension ListCharactersViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return interactor.characters?.count ?? 0
+        if let characters = interactor.characters {
+            return characters.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = listTbv.dequeueReusableCell(withIdentifier: "charactersListCell") as? CharactersListCell {
-            cell.configure(imageURL: interactor.characters?[indexPath.row].thumbnail?.path ?? "" , name: interactor.characters?[indexPath.row].name ?? "")
+            cell.configure(imageURL: interactor.characters?[indexPath.row].thumbnail?.path ?? "" , name: interactor.characters?[indexPath.row].name ?? "", interactor: interactor)
             cell.selectionStyle = .none
             return cell
         }

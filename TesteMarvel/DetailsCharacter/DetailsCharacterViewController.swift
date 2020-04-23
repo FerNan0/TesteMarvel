@@ -18,15 +18,23 @@ class  DetailsCharacterViewController: UIViewController {
     @IBOutlet weak var imgCharacter: UIImageView!
     @IBOutlet weak var btnMoreInformation: UIButton!
     var character: Characters!
+    var interactor: DetailsCharacterInteractorHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let interac = DetailsCharacterInteractor()
+        interactor = interac
         setText()
+        setUI()
     }
     
     func setText() {
         lblName.text = character.name
         btnMoreInformation.setTitle("More information", for: .normal)
+    }
+    
+    func setUI() {
+        imgCharacter.image = interactor.downloadImage(urlString: character.thumbnail?.path ?? "")
     }
     
     @IBAction func clickMoreInformation(_ sender: Any) {

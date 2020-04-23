@@ -6,20 +6,16 @@
 //  Copyright © 2020 Fernando Duarte. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ListCharactersInteractorHelper {
     func doRequestCharacters()
+    func downloadImage(urlString: String) -> UIImage
+    var characters: [Characters]? {get set}
 }
-class ListCharactersInteractor: NSObject {
-    var characters: [Characters]?
+class ListCharactersInteractor: ListCharactersInteractorHelper {
     var presenter: ListCharactersPresenterHelper!
-    
-  
-}
-var count = 0
-
-extension ListCharactersInteractor: ListCharactersInteractorHelper {
+    var characters: [Characters]?
       func doRequestCharacters() {
             ConnectorRequests.request(method: methods.characters.rawValue, completion: { objResponse in
                 OperationQueue.main.addOperation {
@@ -40,4 +36,7 @@ extension ListCharactersInteractor: ListCharactersInteractorHelper {
                 }
             })
         }
+    func downloadImage(urlString: String) -> UIImage{
+        return ConnectorRequests.downloadImage(urlString: urlString)
+    }
 }

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ListCharactersViewControllerHelper {
+    func showAlertFailedRequest()
+    func reloadTBVData()
+}
+
 class ListCharactersViewController: UIViewController {
 
     @IBOutlet weak var listTbv: UITableView!
@@ -20,7 +25,11 @@ class ListCharactersViewController: UIViewController {
         listTbv.dataSource = self
         listTbv.tableFooterView = UIView()
         listTbv.allowsSelection = true
-        interactor.doRequest()
+        listTbv.register(UINib(nibName: "CharactersListCell", bundle: nil), forCellReuseIdentifier: "charactersListCell")
+        let presenter = ListCharactersPresenter()
+        presenter.viewController = self
+        interactor.presenter = presenter
+        interactor.doRequestCharacters()
     }
 }
 
@@ -31,15 +40,15 @@ extension ListCharactersViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return interactor.characters?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if let cell = listTbv.dequeueReusableCell(withIdentifier: "listCell") as? ListCell {
-//            cell.configure(image: movies[indexPath.row].poster ?? "", name: movies[indexPath.row].title ?? "", year: movies[indexPath.row].year ?? "")
-//            cell.selectionStyle = .none
-//            return cell
-//        }
+        if let cell = listTbv.dequeueReusableCell(withIdentifier: "charactersListCell") as? CharactersListCell {
+            cell.configure(imageURL: interactor.characters?[indexPath.row].thumbnail?.path ?? "" , name: interactor.characters?[indexPath.row].name ?? "", interactor: interactor)
+            cell.selectionStyle = .none
+            return cell
+        }
         return UITableViewCell()
     }
     
@@ -59,3 +68,17 @@ extension ListCharactersViewController: UITableViewDelegate, UITableViewDataSour
     
 }
 
+extension ListCharactersViewController: ListCharactersViewControllerHelper {
+    func reloadTBVData() {
+        self.listTbv.reloadData()
+    }
+    
+    
+    func showAlertFailedRequest() {
+        let alert = UIAlertController(title: "Request Failed", message: "Would you like to try it again?", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { Void in
+            self.interactor.doRequestCharacters()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
